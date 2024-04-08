@@ -6,11 +6,17 @@ import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./pages/Home";
 import { SocketProvider } from "./providers/Socket";
+import Room from "./pages/Room";
+import { PeerProvider } from "./providers/Peer";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
+  },
+  {
+    path: "/room/:roomId",
+    element: <Room />,
   },
 ]);
 
@@ -18,7 +24,9 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <SocketProvider>
-      <RouterProvider router={router} />
+      <PeerProvider>
+        <RouterProvider router={router} />
+      </PeerProvider>
     </SocketProvider>
   </React.StrictMode>
 );
